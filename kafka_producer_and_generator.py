@@ -1,6 +1,7 @@
 from kafka import KafkaProducer
 import time
 import json
+import csv
 from random import randint, random
 
 try:
@@ -9,8 +10,11 @@ try:
         value_serializer=lambda v: json.dumps(v).encode('utf-8')
     )
 
-    #определим список клиентов
-    clients = ['Василий Васильев', 'Иван Иванов', 'Петр Петров', 'Павел Павлов', 'Дмитрий Дмитриев', 'Роман Романов', 'Гаврила Гаврилов', 'Тимофей Тимофеев', 'Владимир Владимиров', 'Мария Иванова']
+    #csv на основе которых генирируются сообщения в кафку
+    with open('file.csv', newline='') as csvfile:
+        csvreader = csv.reader(csvfile, delimiter=',', quotechar='|')
+        for row in csvreader:
+            print(', '.jpin(row))
 
 
     for i in range(1000):
