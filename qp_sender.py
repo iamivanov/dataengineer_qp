@@ -1,6 +1,7 @@
 from kafka import KafkaProducer
 import json
 import re
+import time
 
 try:
     producer = KafkaProducer(
@@ -20,14 +21,9 @@ try:
                 trap.pop('device_name')
                 trap.pop('collector')
                 print(trap)
-
-        #создадим сообщение
-        #message = {'client' : client, 'opened': opened, 'priority': priority}
-
-        #print(message)
-        producer.send('lab10_ivanov', value = message)
-        print('message sent')
-        ##time.sleep(1)
+                producer.send('lab10_ivanov', value = trap)
+                print('message sent')
+                #time.sleep(10)
 
 finally:
     producer.close()
